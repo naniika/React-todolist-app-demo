@@ -1,10 +1,6 @@
 import React from 'react';
-import './App.css';
-import Listitems from './ListItems';
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
-library.add(faTrash);
+import TodoListItems from './components/TodoListItems';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -65,23 +61,43 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div>
-          <div className="b">
-            <h1>Todo List App</h1>
+        <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark">
+          <div class="navbar-brand text-capitalize">todo list - react app</div>
+        </nav>
+        <div className="container">
+          <div className="row">
+            <div className="col-10 mx-auto col-md-8 mt-4">
+              <h3 className="text-capitalize text-center">todo input</h3>
+              <div className="card card-body my-3">
+                <form onSubmit={this.addItem}>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <div className="input-group-text bg-primary text-white">
+                        <i className="fas fa-book" />
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control text-capitalize"
+                      placeholder="enter text"
+                      value={this.state.currentItem.text}
+                      onChange={this.handleInput}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-block btn-primary mt-3 text-capitalize">add item</button>
+                </form>
+              </div>
+              <ul className="list-group my-5">
+                <h3 className="text-capitalize text-center">todo list :</h3>
+                <TodoListItems items={this.state.items}
+                  deleteItem={this.deleteItem}
+                  setUpdate={this.setUpdate}
+                />
+              </ul>
+            </div>
           </div>
-          <div className="a">
-            <header>
-              <form id="todo-form" onSubmit={this.addItem}>
-                <input type="text" placeholder="Enter text" value={this.state.currentItem.text} onChange={this.handleInput} />
-                <button type="submit">Add</button>
-              </form>
-            </header>
-          </div>
-          <Listitems items={this.state.items}
-            deleteItem={this.deleteItem}
-            setUpdate={this.setUpdate}
-          />
         </div>
+
       </div>
     );
   }
