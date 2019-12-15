@@ -1,6 +1,6 @@
-import React from 'react';
-import TodoListItems from './components/TodoListItems';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import TodoListItems from "./components/TodoListItems";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -8,10 +8,10 @@ class App extends React.Component {
     this.state = {
       items: [],
       currentItem: {
-        text: '',
-        key: ''
+        text: "",
+        key: ""
       }
-    }
+    };
     this.handleInput = this.handleInput.bind(this);
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
@@ -23,7 +23,7 @@ class App extends React.Component {
         text: e.target.value,
         key: Date.now()
       }
-    })
+    });
   }
   addItem(e) {
     e.preventDefault();
@@ -33,18 +33,17 @@ class App extends React.Component {
       this.setState({
         items: newItems,
         currentItem: {
-          text: '',
-          key: ''
+          text: "",
+          key: ""
         }
-      })
+      });
     }
   }
   deleteItem(key) {
-    const filteredItems = this.state.items.filter(item =>
-      item.key !== key);
+    const filteredItems = this.state.items.filter(item => item.key !== key);
     this.setState({
       items: filteredItems
-    })
+    });
   }
   setUpdate(text, key) {
     const items = this.state.items;
@@ -53,10 +52,10 @@ class App extends React.Component {
         item.text = text;
       }
       return item;
-    })
+    });
     this.setState({
       items: items
-    })
+    });
   }
   render() {
     return (
@@ -84,12 +83,18 @@ class App extends React.Component {
                       onChange={this.handleInput}
                     />
                   </div>
-                  <button type="submit" className="btn btn-block btn-primary mt-3 text-capitalize">add item</button>
+                  <button
+                    type="submit"
+                    className="btn btn-block btn-primary mt-3 text-capitalize"
+                  >
+                    add item
+                  </button>
                 </form>
               </div>
               <ul className="list-group my-5">
                 <h3 className="text-capitalize text-center">todo list :</h3>
-                <TodoListItems items={this.state.items}
+                <TodoListItems
+                  items={this.state.items}
                   deleteItem={this.deleteItem}
                   setUpdate={this.setUpdate}
                 />
@@ -97,7 +102,6 @@ class App extends React.Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }
